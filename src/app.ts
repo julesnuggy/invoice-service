@@ -1,27 +1,26 @@
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
+import cors from "cors";
 
 // Controllers (route handlers)
 import * as indexController from "./controllers/index";
 
-// Create Express server
 const app = express();
 
 // Express configuration
-app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
-app.set("view engine", "ejs");
+app.set("port", process.env.PORT || 9000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+/** In a real-world app, we would NOT use CORS! But for simplicity here, to allow for a response to be
+  * sent to the locally-run front-end, we will use CORS.
+ */
+app.use(cors());
 app.use(
-  express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+  express.static(path.join(__dirname, "dist"))
 );
 
-/**
- * Primary app routes.
- */
+//Primary app routes
 app.get("/", indexController.index);
 
 export default app;

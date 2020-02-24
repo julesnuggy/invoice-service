@@ -5,7 +5,5 @@ import { Request, Response } from "express";
  * Home page.
  */
 export const index = (req: Request, res: Response) => {
-  res.render("index", {
-    title: "Invoicing as a Service"
-  });
+  res.send("This is a response from the backend");
 };
