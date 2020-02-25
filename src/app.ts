@@ -6,13 +6,14 @@ import cors from "cors";
 // Controllers (route handlers)
 import * as indexController from "./controllers/index";
 import * as merchantDashboardController from "./controllers/merchantDashboard";
+import * as createInvoiceController from "./controllers/createInvoice";
 
 const app = express();
 
 // Express configuration
 app.set("port", process.env.PORT || 9000);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 /** In a real-world app, we would NOT use CORS! But for simplicity here, to allow for a response to be
   * sent to the locally-run front-end, we will use CORS.
  */
@@ -24,5 +25,6 @@ app.use(
 //Primary app routes
 app.get("/", indexController.index);
 app.get("/merchant-dashboard", merchantDashboardController.index);
+app.post("/invoice", createInvoiceController.create);
 
 export default app;
