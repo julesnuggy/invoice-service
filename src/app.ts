@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Controllers (route handlers)
 import * as indexController from "./controllers/index";
+import * as merchantDashboardController from "./controllers/merchantDashboard";
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(
 
 //Primary app routes
 app.get("/", indexController.index);
+app.get("/merchant-dashboard", merchantDashboardController.index);
 
 export default app;

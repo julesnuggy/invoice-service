@@ -21,6 +21,7 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
+    "all": "npm run build && npm run start",
     "build": "npm run build-ts && npm run lint",
     "build-ts": "tsc",
     "start": "npm run serve",

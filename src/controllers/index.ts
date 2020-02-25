@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 
 /**
  * GET /
- * Home page.
+ * Home
  */
 export const index = (req: Request, res: Response) => {
-  res.send("This is a response from the backend");
+  res.send("Home page response");
 };
