@@ -7,6 +7,7 @@ import cors from "cors";
 import * as indexController from "./controllers/index";
 import * as merchantDashboardController from "./controllers/merchantDashboard";
 import * as createInvoiceController from "./controllers/createInvoice";
+import * as userController from "./controllers/user";
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(
 
 //Primary app routes
 app.get("/", indexController.index);
+app.post("/user", userController.create);
+app.get("/user", userController.getAll);
 app.get("/merchant-dashboard", merchantDashboardController.index);
 app.post("/invoice", createInvoiceController.create);
 
