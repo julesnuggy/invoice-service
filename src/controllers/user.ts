@@ -22,17 +22,15 @@ export const create = (req: Request, res: Response ) => {
       if(err) {
         console.error(err);
       }
-      res.status(201).send(`Successfully created new user`);
+      res.status(201).send("Successfully created new user");
     });
 };
 
 export const getAll = (req: Request, res: Response ) => {
-  console.log("req.body", req.body);
-
   invoicingClient.query("SELECT * FROM users",
     (err, result) => {
       if(err) {
-        console.error(err);
+        throw err;
       }
       res.status(200).json(result.rows);
     });
