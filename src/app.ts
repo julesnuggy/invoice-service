@@ -27,7 +27,7 @@ app.use(
 app.get("/", indexController.index);
 app.post("/user", userController.create);
 app.get("/user", userController.getAll);
-app.get("/merchant-dashboard", merchantDashboardController.index);
+app.get("/merchant-dashboard/:id", merchantDashboardController.index);
 app.post("/invoice", createInvoiceController.create);
 
 export default app;

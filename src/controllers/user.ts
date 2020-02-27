@@ -1,22 +1,16 @@
 import { Request, Response } from "express";
-import { Pool } from "pg";
+import { createDbPool  } from "../dbClient";
 
-const invoicingClient = new Pool({
-  user: "invoicinguser",
-  password: "password",
-  host: "localhost",
-  port: 5432,
-  database: "invoicing"
-});
 
 /**
  * POST /
  * Create User
  */
 export const create = (req: Request, res: Response ) => {
+  const dbPool = createDbPool();
   const { type, name, balance } = req.body;
 
-  invoicingClient.query("INSERT INTO users (type, name, balance) VALUES ($1, $2, $3)",
+  dbPool.query("INSERT INTO users (type, name, balance) VALUES ($1, $2, $3)",
     [type, name, balance],
     (err, result) => {
       if(err) {
@@ -24,14 +18,17 @@ export const create = (req: Request, res: Response ) => {
       }
       res.status(201).send("Successfully created new user");
     });
+  dbPool.end().catch(err => err);
 };
 
 export const getAll = (req: Request, res: Response ) => {
-  invoicingClient.query("SELECT * FROM users",
+  const dbPool = createDbPool();
+  dbPool.query("SELECT * FROM users",
     (err, result) => {
       if(err) {
         throw err;
       }
       res.status(200).json(result.rows);
     });
+  dbPool.end().catch(err => err);
 };
