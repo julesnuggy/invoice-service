@@ -1,15 +1,3 @@
---psql -U postgres
---[enter password]
-CREATE ROLE invoicinguser WITH LOGIN PASSWORD 'password';
-ALTER ROLE invoicinguser CREATEDB;
-CREATE DATABASE invoicing;
--- \c invoicing
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
---\q
-------------------
-
---psql -d invoicing -U invoicinguser
---[enter password]
 CREATE TABLE users (
 id UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
 type VARCHAR(60),
@@ -44,4 +32,3 @@ price FLOAT8,
 total FLOAT8,
 PRIMARY KEY(invoice_line_id, invoice_id)
 );
-
